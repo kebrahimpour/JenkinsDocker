@@ -1,39 +1,15 @@
 pipeline {
-	agent{ docker {image 'appdynamics/dotnet-core-agent:22.8.0'} }
-	stages {
-		
-			stage('SCM'){
-				steps {
-					checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/FeynmanFan/JenkinsDocker']]])
-				}
-			}
-			stage('Build'){
-				steps {			
-					sh 'dotnet build ConsoleApp1'
-					archiveArtifacts artifacts: 'ConsoleApp1/*.*'
-					
-				}
-			}
-			stage('Test'){
-				steps {
-					echo 'Execute unit tests'
-				}
-			}
-			stage('Package'){
-				steps {
-					echo 'Zip it up'
-				}
-			}
-			stage('Deploy'){
-				steps{
-					echo 'Push to deployment'
-				}
-			}
-			stage('Archive'){
-				steps {
-					archiveArtifacts artifacts: 'ConsoleApp1/*.*'
-				}
-			}
-	}
-	
+    agent {
+        docker {
+            image 'maven:3-alpine'
+            args '-v $HOME/.m2:/root/.m2'
+        }
+    }
+    stages {
+        stage('Build') {
+            steps {
+                sh 'mvn -B'
+            }
+        }
+    }
 }
