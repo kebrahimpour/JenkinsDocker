@@ -12,7 +12,7 @@ pipeline {
                 echo hello World
                 ls -R
                 whoami
-                ls -R /home
+                ls -R /
                 '''
             }
         }
