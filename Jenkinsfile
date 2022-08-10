@@ -1,5 +1,5 @@
 pipeline {
-	
+	agent any
 	stages {
 		
 			stage('SCM'){
@@ -10,9 +10,10 @@ pipeline {
 			stage('Build'){
 				steps {
 					try{
-					sh 'dotnet build ConsoleApp1'
-					}finally{
-					archiveArtifacts artifacts: 'ConsoleApp1/*.*'
+						sh 'dotnet build ConsoleApp1'
+					}
+					finally{
+						archiveArtifacts artifacts: 'ConsoleApp1/*.*'
 					}
 				}
 			}
