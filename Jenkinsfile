@@ -8,13 +8,10 @@ pipeline {
 				}
 			}
 			stage('Build'){
-				steps {
-					try{
-						sh 'dotnet build ConsoleApp1'
-					}
-					finally{
-						archiveArtifacts artifacts: 'ConsoleApp1/*.*'
-					}
+				steps {			
+					sh 'dotnet build ConsoleApp1'
+					archiveArtifacts artifacts: 'ConsoleApp1/*.*'
+					
 				}
 			}
 			stage('Test'){
