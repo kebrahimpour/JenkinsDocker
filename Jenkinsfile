@@ -8,7 +8,12 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh 'mvn -B'
+                sh '''
+                echo hello World
+                ls -R
+                whoami
+                ls -R /home
+                '''
             }
         }
     }
