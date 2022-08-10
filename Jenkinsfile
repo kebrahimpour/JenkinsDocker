@@ -1,5 +1,5 @@
 pipeline {
-	docker {dotnet/runtime:latest}
+	docker {appdynamics/dotnet-core-agent:22.8.0}
 	stages {
 		
 			stage('SCM'){
